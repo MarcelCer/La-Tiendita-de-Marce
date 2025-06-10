@@ -1,0 +1,13 @@
+.detalle-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: rgb(252, 252, 252);
+}
+
+.detalle-imagen {
+  width: 200px; /* Ancho fijo */
+  height: 200px; /* Mantiene la proporción */
+  object-fit: cover; /* Asegura que la imagen se ajuste bien */
+}

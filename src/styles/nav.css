@@ -1,0 +1,9 @@
+.nav {
+ background-color: hsl(284, 36%, 35%);
+  flex: 0 0 90%;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding:5px;
+
+}

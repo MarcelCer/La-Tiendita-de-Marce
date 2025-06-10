@@ -1,0 +1,86 @@
+.producto-carrito {
+  display: flex;
+  flex-direction: column;
+  width: 600px;
+  height: 100px;
+  padding: 10px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  margin: 5px;
+  gap: 10px;
+  text-align: center;
+  background-color: #e8ecea;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.producto-carrito-descripcion {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 40%;
+}
+
+.producto-imagen {
+  width: 100px;
+  height: 100px;
+  margin: 10px;
+  object-fit: cover;
+}
+
+.producto-carrito-descripcion h3 {
+  font-size: 16px;
+  margin: 10px 0;
+}
+
+.producto p {
+  font-size: 14px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 10px;
+  gap: 20px;
+  text-align: center;
+  background-color: #e8ecea;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.producto-carrito-totales {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto auto;
+  grid-template-areas:
+    "titulo"
+    "totales";
+  width: 60%;
+  gap: 10px;
+  text-align: center;
+}
+
+.titulos {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  font-size: 12px;
+  font-weight: bold;
+  color: #576277;
+}
+
+.totales {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  font-size: 16px;
+  color: #576277;
+}
+
+.btn-eliminar {
+  background-color: #ff4d4d;
+  color: white;
+  border: none;
+  padding: 5px 5px;
+  cursor: pointer;
+  font-size: 12px;
+  border-radius: 5px;
+}
