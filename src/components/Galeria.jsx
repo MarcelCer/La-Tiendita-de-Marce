@@ -7,7 +7,7 @@ function Galeria() {
     { src: "../img/foto3.jpg", titulo: "Romántica" },
     { src: "../img/foto4.jpg", titulo: "Sensual" },
     {
-      video: "../videos/video3.mp4",
+      video: "../videos/video4.mp4",
       titulo: "Primavera",
     },
     { src: "../img/foto5.jpg", titulo: "Todo seda" },
