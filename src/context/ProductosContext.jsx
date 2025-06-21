@@ -1,4 +1,5 @@
 import React, { createContext, useState, useContext } from "react";
+
 // Crear el contexto de de los productos
 const ProductosContext = createContext();
 export function ProductosProvider({ children }) {
@@ -118,6 +119,31 @@ export function ProductosProvider({ children }) {
     });
   }
 
+  const eliminarProducto = (id) => {
+    const confirmar = window.confirm("¿Estás seguro de eliminar?");
+    if (confirmar) {
+      return new Promise(async (res, rej) => {
+        try {
+          console.log("🗑️ Eliminando producto con ID:", id);
+          const respuesta = await fetch(
+            `https://68100d9e27f2fdac24102149.mockapi.io/productos/${id}`,
+            {
+              method: "DELETE",
+            }
+          );
+          if (!respuesta.ok)
+            throw new Error(`Error al eliminar (código: ${respuesta.status})`);
+          alert("Producto eliminado correctamente.");
+          res();
+        } catch (error) {
+          console.error(error.message);
+          alert("Hubo un problema al eliminar el producto.");
+          rej(error);
+        }
+      });
+    }
+  };
+
   return (
     <ProductosContext.Provider
       value={{
@@ -127,6 +153,7 @@ export function ProductosProvider({ children }) {
         obtenerProducto,
         productoEncontrado,
         editarProducto,
+        eliminarProducto,
       }}
     >
       {children}
