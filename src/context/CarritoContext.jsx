@@ -86,6 +86,12 @@ export function CarritoProvider({ children }) {
     );
   }
 
+  const totalCarrito = productosCarrito.reduce((acum, prod) => {
+    const precio = parseFloat(prod.price);
+    const cantidad = prod.cantidad || 1; // Ajustá el nombre si usás otro campo
+    return acum + precio * cantidad;
+  }, 0);
+
   return (
     <CarritoContext.Provider
       value={{
@@ -96,6 +102,7 @@ export function CarritoProvider({ children }) {
         descontarProductoDelCarrito,
         sumarAlCarrito,
         vaciarCarrito,
+        totalCarrito,
       }}
     >
       {children}

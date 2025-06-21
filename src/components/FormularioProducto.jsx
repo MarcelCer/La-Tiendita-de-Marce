@@ -1,16 +1,18 @@
 import React, { useState } from "react";
 import { useAuthContext } from "../context/AuthContext";
-import { agregarProducto } from "../assets/requests";
+
 import { dispararSweet } from "../assets/SweetAlert";
 import { Navigate } from "react-router-dom";
+import { useProductosContext } from "../context/ProductosContext";
 
 function FormularioProducto() {
+  const { agregarProducto } = useProductosContext();
   console.log("FormularioProducto se está renderizando...");
   const { admin } = useAuthContext();
   const [producto, setProducto] = useState({
     name: "",
     price: "",
-    description: "URL de la imágen",
+    descripcion: "",
     image: "",
   });
 
@@ -20,7 +22,7 @@ function FormularioProducto() {
     if (!validarForm) {
       agregarProducto(producto)
         .then((data) => {
-          setProducto({ name: "", price: "", description: "", imagen: "" });
+          setProducto({ name: "", price: "", descripcion: "", imagen: "" });
         })
         .catch((error) => {
           dispararSweet(
@@ -48,7 +50,7 @@ function FormularioProducto() {
     if (!producto.price || producto.price <= 0) {
       return "El precio debe ser mayor a 0.";
     }
-    if (!producto.description.trim() || producto.description.length < 10) {
+    if (!producto.descripcion.trim() || producto.descripcion.length < 10) {
       return "La descripción debe tener al menos 10 caracteres.";
     }
     if (!producto.image.trim()) {
@@ -85,13 +87,19 @@ function FormularioProducto() {
         <label htmlFor="image">
           Imágen:
           <input
-            type="text"
+            type="url"
             name="image"
             value={producto.image}
             onChange={handleChange}
+            placeholder="Ingresa la URL de la imagen"
             required
           />
         </label>
+        <img
+          src={producto.image}
+          alt="Vista previa"
+          style={{ maxWidth: "300px", marginTop: "10px" }}
+        />
       </div>
       <div>
         <label htmlFor="price">
@@ -108,17 +116,17 @@ function FormularioProducto() {
       </div>
 
       <div>
-        <label htmlFor="description">
+        <label htmlFor="descripcion">
           Descripción:
           <textarea
-            name="description"
-            value={producto.description}
+            name="descripcion"
+            value={producto.descripcion}
             onChange={handleChange}
             required
           />
         </label>
       </div>
-      <button type="submit">Agregar Producto</button>
+      <button type="submit"></button>
     </form>
   );
 }

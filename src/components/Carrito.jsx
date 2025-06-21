@@ -15,6 +15,7 @@ function Carrito() {
     eliminarProductoDelCarrito,
     sumarAlCarrito,
     descontarProductoDelCarrito,
+    totalCarrito,
   } = useContext(CarritoContext);
 
   if (!user) {
@@ -25,19 +26,20 @@ function Carrito() {
     <div className="carrito-container">
       {productosCarrito.length > 0 ? (
         productosCarrito.map((producto) => (
-          <>
-            <CardCarrito
-              producto={producto}
-              key={producto.id}
-              onEliminarProductoDelCarrito={eliminarProductoDelCarrito}
-              onSumarAlCarrito={sumarAlCarrito}
-              onDescontarProductoDelCarrito={descontarProductoDelCarrito}
-            />
-          </>
+          <CardCarrito
+            producto={producto}
+            key={producto.id}
+            onEliminarProductoDelCarrito={eliminarProductoDelCarrito}
+            onSumarAlCarrito={sumarAlCarrito}
+            onDescontarProductoDelCarrito={descontarProductoDelCarrito}
+          />
         ))
       ) : (
         <p>Carrito vacío</p>
       )}
+      <div className="total-carrito">
+        <h3>Total: ${totalCarrito.toLocaleString()}</h3>
+      </div>
     </div>
   );
 }

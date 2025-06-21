@@ -20,20 +20,23 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
 export function crearUsuario(email, password) {
-  createUserWithEmailAndPassword(auth, email, password)
-    .then((userCredential) => {
-      // Signed up
-      const user = userCredential.user;
-      console.log("Credenciales", userCredential);
-      console.log(user);
-      // ...
-    })
-    .catch((error) => {
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      console.log(error.code, error.message);
-      // ..
-    });
+  return new Promise((resolve, reject) => {
+    createUserWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        // Signed up
+        const user = userCredential.user;
+        console.log("Credenciales", userCredential);
+        console.log(user);
+        resolve(user);
+        // ...
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        console.log(error.code);
+        reject(error);
+        // ..
+      });
+  });
 }
 
 export function loginEmailPass(email, password) {
@@ -48,9 +51,9 @@ export function loginEmailPass(email, password) {
         //..
       })
       .catch((error) => {
-        console.log(error.code, error.message);
+        console.log(error.code);
         const errorCode = error.code;
-        const errorMessage = error.message;
+
         reject(error);
       });
   });

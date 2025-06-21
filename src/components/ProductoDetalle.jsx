@@ -1,33 +1,34 @@
 import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { dispararSweet } from "../assets/SweetAlert";
 import "../styles/productoDetalle.css";
 import { CarritoContext } from "../context/CarritoContext";
+import { useAuthContext } from "../context/AuthContext";
+import { Link } from "react-router-dom";
+import { useProductosContext } from "../context/ProductosContext";
+import { dispararSweet } from "../assets/SweetAlert";
 
 function ProductoDetalle() {
+  const { admin } = useAuthContext();
   const { agregarAlCarrito } = useContext(CarritoContext);
+  const { productoEncontrado, obtenerProducto } = useProductosContext();
   const { id } = useParams();
-  const [producto, setProducto] = useState(null);
+
   const [cantidad, setCantidad] = useState(1);
   const [cargando, setCargando] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetch("https://68100d9e27f2fdac24102149.mockapi.io/productos")
-      .then((res) => res.json())
-      .then((datos) => {
-        const productoEncontrado = datos.find((item) => item.id === id);
-        if (productoEncontrado) {
-          setProducto(productoEncontrado);
-          // console.log("cantidad de productos " + cantidad);
-        } else {
-          setError("Producto no encontrado.");
-        }
+    obtenerProducto(id)
+      .then(() => {
         setCargando(false);
       })
-      .catch((err) => {
-        console.log("Error:", err);
-        setError("Hubo un error al obtener el producto.");
+      .catch((error) => {
+        if (error == "Producto no encontrado") {
+          setError("Producto no encontrado");
+        }
+        if (error == "Hubo un error al obtener el producto.") {
+          setError("Hubo un error al obtener el producto.");
+        }
         setCargando(false);
       });
   }, [id]);
@@ -36,11 +37,11 @@ function ProductoDetalle() {
     if (cantidad < 1) return;
     dispararSweet(
       "Producto Agregado",
-      "El producto fue agregado al carrito con éxito",
+      "El producto fue agregado al carrito",
       "success",
       "Cerrar"
     );
-    agregarAlCarrito({ ...producto, cantidad });
+    agregarAlCarrito({ ...productoEncontrado, cantidad });
   }
 
   function sumarContador() {
@@ -55,26 +56,32 @@ function ProductoDetalle() {
 
   if (cargando) return <p>Cargando producto...</p>;
   if (error) return <p>{error}</p>;
-  if (!producto) return null;
+  if (!productoEncontrado) return null;
 
   return (
     <div className="detalle-container">
       <img
         className="detalle-imagen"
-        src={producto.image}
-        alt={producto.name}
+        src={productoEncontrado.image}
+        alt={productoEncontrado.name}
       />
       <div className="detalle-info">
-        <h2>{producto.name}</h2>
-        <p>{producto.description}</p>
-        <p>${producto.price}</p>
-        <span>Sub total: ${producto.price * cantidad}</span>
+        <h2>{productoEncontrado.name}</h2>
+        <p>{productoEncontrado.descripcion}</p>
+        <p>${productoEncontrado.price}</p>
+        <span>Sub total: ${Number(productoEncontrado.price * cantidad)}</span>
         <div className="detalle-contador">
           <button onClick={restarContador}>-</button>
           <span>{cantidad}</span>
           <button onClick={sumarContador}>+</button>
         </div>
-        <button onClick={agregar}>Agregar al carrito</button>
+        {admin ? (
+          <Link to={`/admin/editarProducto/${productoEncontrado.id}`}>
+            <button>Editar Producto</button>
+          </Link>
+        ) : (
+          <button onClick={agregar}>Agregar al carrito</button>
+        )}
       </div>
     </div>
   );

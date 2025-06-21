@@ -8,7 +8,7 @@ function CardCarrito({
     <div key={producto.id} className="producto-carrito">
       <div className="producto-carrito-descripcion">
         <h3>{producto.name}</h3>
-        <p>{producto.description}</p>
+        <p>{producto.descripcion}</p>
         <img className="producto-imagen" src={producto.image}></img>
       </div>
 

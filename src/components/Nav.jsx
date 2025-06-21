@@ -53,17 +53,7 @@ function Nav({}) {
             Contacto
           </Link>
         </li>
-        <li>
-          <Link
-            to="/carrito"
-            style={{ color: "white", textDecoration: "none" }}
-          >
-            Carrito{" "}
-            <span>
-              {productosCarrito.length > 0 ? productosCarrito.length : ""}
-            </span>
-          </Link>
-        </li>
+        {/*}
         {admin ? (
           <li>
             <Link
@@ -75,7 +65,7 @@ function Nav({}) {
           </li>
         ) : (
           <></>
-        )}
+        )*/}
         <li>
           <Link to="/login" style={{ color: "white", textDecoration: "none" }}>
             Login
