@@ -9,6 +9,8 @@ import { Link } from "react-router-dom";
 import { useProductosContext } from "../context/ProductosContext";
 import { dispararSweet } from "../assets/SweetAlert";
 import Swal from "sweetalert2";
+import BotonEliminar from "./BotonEliminar";
+import BotonEditar from "./BotonEditar";
 
 function ProductoDetalle() {
   const { admin } = useAuthContext();
@@ -124,15 +126,18 @@ function ProductoDetalle() {
           <span>{cantidad}</span>
           <button onClick={sumarContador}>+</button>
         </div>
+
         {admin ? (
           <Link to={`/admin/editarProducto/${productoEncontrado.id}`}>
-            <button>Editar Producto</button>
+            <BotonEditar>Editar Producto</BotonEditar>
           </Link>
         ) : (
           <button onClick={agregar}>Agregar al carrito</button>
         )}
         {admin ? (
-          <button onClick={dispararEliminar}>Eliminar Producto</button>
+          <BotonEliminar onClick={dispararEliminar}>
+            Eliminar Producto
+          </BotonEliminar>
         ) : (
           <></>
         )}

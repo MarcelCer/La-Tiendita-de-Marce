@@ -15,6 +15,7 @@ import FormularioProducto from "./components/FormularioProducto";
 import FormularioEdicion from "./components/FormularioEdicion";
 import { useAuthContext } from "./context/AuthContext";
 import { useEffect } from "react";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
   const { verificacionLog } = useAuthContext();

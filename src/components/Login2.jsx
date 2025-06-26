@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useAuthContext } from "../context/AuthContext";
 import { crearUsuario, loginEmailPass } from "../auth/firebase";
 import { dispararSweet } from "../assets/SweetAlert";
+import { useEffect } from "react";
 
 function Login2() {
   const [usuario, setUsuario] = useState("");
@@ -10,6 +11,12 @@ function Login2() {
   const [show, setShow] = useState(true);
   const { login, user, logout } = useAuthContext();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    // Cada vez que el estado `show` cambia, se limpian los campos
+    setUsuario("");
+    setPassword("");
+  }, [show]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -46,7 +53,10 @@ function Login2() {
   }
 
   const handleSubmit2 = (e) => {
+    e.preventDefault();
     logout();
+    setUsuario("");
+    setPassword("");
   };
 
   function iniciarSesionEmailPass(e) {

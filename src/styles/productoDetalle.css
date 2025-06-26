@@ -11,3 +11,11 @@
   height: 200px; /* Mantiene la proporción */
   object-fit: cover; /* Asegura que la imagen se ajuste bien */
 }
+
+.detalle-botones {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}

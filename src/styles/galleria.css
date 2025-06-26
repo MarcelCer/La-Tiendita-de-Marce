@@ -39,3 +39,7 @@
   padding: 5px;
   font-size: 14px;
 }
+
+.container bg-success {
+  background-color: beige;
+}
