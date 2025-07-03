@@ -1,9 +1,11 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useContext, useState } from "react";
 import { dispararSweet } from "../assets/SweetAlert";
 import { TbAlertOctagonFilled } from "react-icons/tb";
 
 // Crear el contexto
 export const CarritoContext = createContext();
+
+export const useCarritoContext = () => useContext(CarritoContext);
 
 // Proveedor del contexto
 export function CarritoProvider({ children }) {

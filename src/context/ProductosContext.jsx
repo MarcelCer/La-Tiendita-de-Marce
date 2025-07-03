@@ -144,6 +144,14 @@ export function ProductosProvider({ children }) {
     }
   };
 
+  function buscarProductos(termino) {
+    return productos.filter(
+      (producto) =>
+        producto.name &&
+        producto.name.toLowerCase().includes(termino.toLowerCase())
+    );
+  }
+
   return (
     <ProductosContext.Provider
       value={{
@@ -154,6 +162,7 @@ export function ProductosProvider({ children }) {
         productoEncontrado,
         editarProducto,
         eliminarProducto,
+        buscarProductos,
       }}
     >
       {children}

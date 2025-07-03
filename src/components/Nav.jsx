@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { CarritoContext, CarritoProvider } from "../context/CarritoContext";
 import { useAuthContext } from "../context/AuthContext";
 
@@ -25,60 +25,55 @@ function Nav({}) {
         }}
       >
         <li>
-          <Link to="/" style={{ color: "white", textDecoration: "none" }}>
+          <NavLink to="/" style={{ color: "white", textDecoration: "none" }}>
             Inicio
-          </Link>
+          </NavLink>
         </li>
         <li>
-          <Link
+          <NavLink
             to="/productos"
             style={{ color: "white", textDecoration: "none" }}
           >
             Productos
-          </Link>
+          </NavLink>
         </li>
         <li>
-          <Link
+          <NavLink
             to="/nosotros"
             style={{ color: "white", textDecoration: "none" }}
           >
             Nosotros
-          </Link>
+          </NavLink>
         </li>
         <li>
-          <Link
+          <NavLink
             to="/contacto"
             style={{ color: "white", textDecoration: "none" }}
           >
             Contacto
-          </Link>
+          </NavLink>
         </li>
-        {/*}
-        {admin ? (
-          <li>
-            <Link
-              to="/admin"
-              style={{ color: "white", textDecoration: "none" }}
-            >
-              Admin
-            </Link>
-          </li>
-        ) : (
-          <></>
-        )*/}
+
         <li>
-          <Link to="/login" style={{ color: "white", textDecoration: "none" }}>
+          <NavLink
+            to="/login"
+            style={{ color: "white", textDecoration: "none" }}
+          >
             Login
-          </Link>
+          </NavLink>
         </li>
         {admin ? (
           <li>
-            <Link
+            <NavLink
               to="/admin/agregarProducto"
-              style={{ color: "white", textDecoration: "none" }}
+              style={({ isActive }) => ({
+                color: isActive ? "#ffc107" : "white",
+                textDecoration: "none",
+                fontWeight: isActive ? "bold" : "normal",
+              })}
             >
               Agregar productos
-            </Link>
+            </NavLink>
           </li>
         ) : (
           <></>

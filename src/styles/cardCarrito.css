@@ -1,14 +1,14 @@
 .producto-carrito {
   display: flex;
-  flex-direction: column;
-  width: 600px;
-  height: 100px;
+  width: 100%;
+  max-width: 800px;
+  height: 200px;
   padding: 10px;
-  display: flex;
+  box-sizing: border-box;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  margin: 5px;
+  margin: 0 auto;
   gap: 10px;
   text-align: center;
   background-color: #e8ecea;
@@ -17,35 +17,44 @@
 
 .producto-carrito-descripcion {
   display: flex;
+  flex: 1;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
   width: 40%;
+  min-width: 0;
 }
 
 .producto-imagen {
-  width: 100px;
-  height: 100px;
+  width: 120px;
+  max-width: 100%;
+  height: 120px;
   margin: 10px;
   object-fit: cover;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
 }
 
 .producto-carrito-descripcion h3 {
-  font-size: 16px;
+  font-size: 18px;
+  color: #222;
+  font-weight: 500;
   margin: 10px 0;
+  text-align: left;
 }
 
 .producto p {
-  font-size: 14px;
+  font-size: 12px;
   padding: 10px;
   display: flex;
   flex-direction: column;
   align-items: center;
   margin: 10px;
-  gap: 20px;
-  text-align: center;
+  gap: 30px;
+  text-align: left;
   background-color: #e8ecea;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
 }
 
 .producto-carrito-totales {
@@ -56,7 +65,8 @@
     "titulo"
     "totales";
   width: 60%;
-  gap: 10px;
+  min-width: 0;
+  gap: 5px;
   text-align: center;
 }
 
@@ -76,11 +86,17 @@
 }
 
 .btn-eliminar {
-  background-color: #ff4d4d;
+  background-color: #f48c8c;
   color: white;
   border: none;
   padding: 5px 5px;
   cursor: pointer;
   font-size: 12px;
   border-radius: 5px;
+}
+
+.card-wrapper {
+  width: 100%;
+  max-width: 800px;
+  box-sizing: border-box;
 }

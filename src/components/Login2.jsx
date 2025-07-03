@@ -4,6 +4,8 @@ import { useAuthContext } from "../context/AuthContext";
 import { crearUsuario, loginEmailPass } from "../auth/firebase";
 import { dispararSweet } from "../assets/SweetAlert";
 import { useEffect } from "react";
+import { useCarritoContext } from "../context/CarritoContext";
+import { Form, Button, Card, Container } from "react-bootstrap";
 
 function Login2() {
   const [usuario, setUsuario] = useState("");
@@ -11,7 +13,7 @@ function Login2() {
   const [show, setShow] = useState(true);
   const { login, user, logout } = useAuthContext();
   const navigate = useNavigate();
-
+  const { vaciarCarrito } = useCarritoContext();
   useEffect(() => {
     // Cada vez que el estado `show` cambia, se limpian los campos
     setUsuario("");
@@ -54,29 +56,32 @@ function Login2() {
 
   const handleSubmit2 = (e) => {
     e.preventDefault();
+    vaciarCarrito();
     logout();
     setUsuario("");
     setPassword("");
   };
 
+  function handleShow(e) {
+    e.preventDefault();
+    setShow(!show);
+  }
+
   function iniciarSesionEmailPass(e) {
     e.preventDefault();
     loginEmailPass(usuario, password)
       .then((user) => {
-        login(usuario);
-        dispararSweet("Logeo exitoso", "", "success", "Confirmar");
+        login(user); // acá podés pasar todo el user o user.email según cómo lo manejes en AuthContext
+        dispararSweet("Inicio de sesión exitoso", "", "success", "Confirmar");
+        navigate("/");
       })
       .catch((error) => {
         if (error.code === "auth/invalid-credential") {
           dispararSweet("Credenciales incorrectas", "", "error", "Cerrar");
+        } else {
+          dispararSweet("Error", error.message, "error", "Cerrar");
         }
-        //alert("Error")
       });
-  }
-
-  function handleShow(e) {
-    e.preventDefault();
-    setShow(!show);
   }
 
   if (user) {
@@ -88,62 +93,100 @@ function Login2() {
   }
   if (!user && show) {
     return (
-      <div>
-        <form onSubmit={iniciarSesionEmailPass}>
-          <h2>Iniciar sesión con Email y pass</h2>
-          <div>
-            <label>Email</label>
-            <input
-              type="text"
-              value={usuario}
-              onChange={(e) => setUsuario(e.target.value)}
-            />
-          </div>
-          <div>
-            <label>Contraseña:</label>
-            <input
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-          </div>
-          <button type="submit">Iniciar sesión</button>
-        </form>
-        <button style={{ marginTop: "2px" }} onClick={handleShow}>
-          Registrate
-        </button>
-      </div>
+      <Container className="d-flex justify-content-center align-items-center min-vh-100 bg-light">
+        <Card className="p-4 shadow w-100" style={{ maxWidth: "400px" }}>
+          <Card.Body>
+            <Card.Title className="mb-4 text-center fw-bold">
+              Iniciar sesión
+            </Card.Title>
+
+            <Form onSubmit={iniciarSesionEmailPass}>
+              <Form.Group className="mb-3" controlId="formEmail">
+                <Form.Label>Email</Form.Label>
+                <Form.Control
+                  type="email"
+                  value={usuario}
+                  onChange={(e) => setUsuario(e.target.value)}
+                  placeholder="Ingresá tu email"
+                  required
+                />
+              </Form.Group>
+
+              <Form.Group className="mb-4" controlId="formPassword">
+                <Form.Label>Contraseña</Form.Label>
+                <Form.Control
+                  type="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  placeholder="Ingresá tu contraseña"
+                  required
+                />
+              </Form.Group>
+
+              <div className="d-grid">
+                <Button type="submit" variant="primary">
+                  Iniciar sesión
+                </Button>
+              </div>
+            </Form>
+
+            <div className="text-center mt-3">
+              <Button variant="link" onClick={handleShow}>
+                ¿No tenés cuenta? Registrate
+              </Button>
+            </div>
+          </Card.Body>
+        </Card>
+      </Container>
     );
   }
   if (!user && !show) {
     return (
-      <div>
-        <form onSubmit={registrarUsuario}>
-          <h2>Registrarse</h2>
-          <div>
-            <label>Email:</label>
-            <input
-              type="text"
-              value={usuario}
-              onChange={(e) => setUsuario(e.target.value)}
-            />
-          </div>
-          <div>
-            <label>Contraseña:</label>
-            <input
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-          </div>
-          <button type="submit" style={{ marginTop: "2px" }}>
-            Registrarse
-          </button>
-        </form>
-        <button style={{ marginTop: "2px" }} onClick={handleShow}>
-          Iniciar Sesión
-        </button>
-      </div>
+      <Container className="d-flex justify-content-center align-items-center min-vh-100 bg-light">
+        <Card className="p-4 shadow w-100" style={{ maxWidth: "400px" }}>
+          <Card.Body>
+            <Card.Title className="mb-4 text-center fw-bold">
+              Registrarse
+            </Card.Title>
+
+            <Form onSubmit={registrarUsuario}>
+              <Form.Group className="mb-3" controlId="formEmail">
+                <Form.Label>Email</Form.Label>
+                <Form.Control
+                  type="email"
+                  value={usuario}
+                  onChange={(e) => setUsuario(e.target.value)}
+                  placeholder="Ingresá tu email"
+                  required
+                />
+              </Form.Group>
+
+              <Form.Group className="mb-4" controlId="formPassword">
+                <Form.Label>Contraseña</Form.Label>
+                <Form.Control
+                  type="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  placeholder="Ingresá una contraseña segura"
+                  required
+                />
+              </Form.Group>
+
+              <div className="d-grid">
+                <Button type="submit" variant="success">
+                  Registrarse
+                </Button>
+              </div>
+            </Form>
+
+            <div className="text-center mt-3">
+              <Button variant="link" onClick={handleShow}>
+                ¿Ya tenés cuenta? Iniciar sesión
+              </Button>
+            </div>
+          </Card.Body>
+        </Card>
+      </Container>
     );
   }
   //Formulario para inicio de sesion sin firebase

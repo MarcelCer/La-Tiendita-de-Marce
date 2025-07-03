@@ -1,4 +1,5 @@
 import styled from "styled-components";
+
 const BotonDelete = styled.button`
   background-color: #920d0d;
   color: white;
@@ -10,8 +11,8 @@ const BotonDelete = styled.button`
     background-color: #eb2e2e;
   }
 `;
-function BotonEliminar() {
-  return <BotonDelete>Eliminar Producto</BotonDelete>;
+function BotonEliminar({ onClick, children }) {
+  return <BotonDelete onClick={onClick}>{children}</BotonDelete>;
 }
 
 export default BotonEliminar;

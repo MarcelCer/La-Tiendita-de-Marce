@@ -1,8 +1,8 @@
 import React from "react";
 
-import CardCarrito from "./CardCarrito";
+import CardCarrito from "./CardCarritoBoostrap";
 import "../styles/carrito-container.css";
-import "../styles/cardCarrito.css";
+
 import { Navigate } from "react-router-dom";
 import { useContext } from "react";
 import { CarritoContext } from "../context/CarritoContext";
@@ -26,13 +26,20 @@ function Carrito() {
     <div className="carrito-container">
       {productosCarrito.length > 0 ? (
         productosCarrito.map((producto) => (
-          <CardCarrito
-            producto={producto}
+          <div
             key={producto.id}
-            onEliminarProductoDelCarrito={eliminarProductoDelCarrito}
-            onSumarAlCarrito={sumarAlCarrito}
-            onDescontarProductoDelCarrito={descontarProductoDelCarrito}
-          />
+            className="d-flex justify-content-center mb-3"
+            style={{ width: "100%" }}
+          >
+            <div className="card-wrapper w-100" style={{ maxWidth: "800px" }}>
+              <CardCarrito
+                producto={producto}
+                onEliminarProductoDelCarrito={eliminarProductoDelCarrito}
+                onSumarAlCarrito={sumarAlCarrito}
+                onDescontarProductoDelCarrito={descontarProductoDelCarrito}
+              />
+            </div>
+          </div>
         ))
       ) : (
         <p>Carrito vacío</p>

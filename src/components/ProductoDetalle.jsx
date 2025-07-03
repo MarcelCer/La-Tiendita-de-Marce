@@ -108,6 +108,7 @@ function ProductoDetalle() {
   if (cargando) return <p>Cargando producto...</p>;
   if (error) return <p>{error}</p>;
   if (!productoEncontrado) return null;
+  console.log("¿Admin está activo?", admin);
 
   return (
     <div className="detalle-container">

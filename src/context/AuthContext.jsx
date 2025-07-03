@@ -7,14 +7,13 @@ export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
   const [admin, setAdmin] = useState(false);
 
-  const login = (username) => {
-    // Simulando la creación de un token (en una app real, esto sería generado por un servidor)
-    const token = `fake-token-${username}`;
-    if (username === "admin@gmail.com") {
-      setAdmin(true);
-    }
+  const login = (userData) => {
+    const email = userData.email;
+    const token = `fake-token-${email}`;
+
     localStorage.setItem("authToken", token);
-    setUser(username);
+    setUser(email);
+    setAdmin(email === "admin@gmail.com"); // ✔️ comparación correcta
   };
 
   const logout = () => {
@@ -23,7 +22,8 @@ export function AuthProvider({ children }) {
     setAdmin(false);
   };
 
-  function verificacionLog() {
+  {
+    /*function verificacionLog() {
     const userToken = localStorage.getItem("authToken");
     if (userToken && userToken == "fake-token-admin@gmail.com") {
       setAdmin(true);
@@ -32,6 +32,21 @@ export function AuthProvider({ children }) {
     if (userToken) {
       setUser(userToken);
     }
+  }*/
+  }
+
+  async function verificacionLog() {
+    const userToken = localStorage.getItem("authToken");
+
+    if (userToken) {
+      const email = userToken.replace("fake-token-", "");
+      setUser(email);
+      setAdmin(email === "admin@gmail.com"); // ← Aquí se asegura que admin quede bien seteado
+    } else {
+      setUser(null);
+      setAdmin(false);
+    }
+    return Promise.resolve();
   }
 
   return (

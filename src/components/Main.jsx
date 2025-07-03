@@ -5,7 +5,7 @@ function Main() {
   return (
     <main style={{ padding: "10px" }}>
       <h2>Tendencias</h2>
-      <div class="container bg-success p-2 text-dark bg-opacity-10">
+      <div className="container bg-success p-2 text-dark bg-opacity-10">
         <Galeria />
       </div>
 
