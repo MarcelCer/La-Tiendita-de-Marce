@@ -59,7 +59,6 @@ function Galeria() {
           <div className="titulo">{el.titulo}</div>
         </div>
       ))}
-      <p>Designed by Freepik.es</p>
     </div>
   );
 }

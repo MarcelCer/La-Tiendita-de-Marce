@@ -1,43 +1,49 @@
-import { useEffect, useState } from "react";
-import { useParams, Navigate } from "react-router-dom";
-import { useProductosContext } from "../context/ProductosContext";
+import React, { useState } from "react";
 import { useAuthContext } from "../context/AuthContext";
-import { toast, ToastContainer } from "react-toastify";
+import { dispararSweet } from "../assets/SweetAlert";
+import { Navigate } from "react-router-dom";
+import { useProductosContext } from "../context/ProductosContext";
 
-function FormularioEdicion() {
+function FormularioProducto() {
+  const { agregarProducto } = useProductosContext();
   const { admin } = useAuthContext();
-  const { obtenerProducto, productoEncontrado, editarProducto } =
-    useProductosContext();
-  const { id } = useParams();
   const [producto, setProducto] = useState({
     name: "",
     price: "",
     descripcion: "",
-    imagen: "",
+    image: "",
   });
-  const [cargando, setCargando] = useState(true);
-  const [error, setError] = useState(null);
 
-  useEffect(() => {
-    obtenerProducto(id)
-      .then(() => {
-        setProducto((prev) => ({
-          name: productoEncontrado.name || "",
-          price: productoEncontrado.price || "",
-          descripcion: productoEncontrado.descripcion || "",
-          imagen: productoEncontrado.imagen || "",
-        }));
-        setCargando(false);
-      })
-      .catch((err) => {
-        setError("Hubo un error al obtener el producto.");
-        setCargando(false);
-      });
-  }, [id]);
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setProducto({ ...producto, [name]: value });
+  const handleSubmit2 = (e) => {
+    e.preventDefault();
+    const validarForm = validarFormulario();
+    if (!validarForm) {
+      agregarProducto(producto)
+        .then(() => {
+          setProducto({ name: "", price: "", descripcion: "", image: "" });
+          dispararSweet(
+            "Producto agregado",
+            "El producto se agregó correctamente",
+            "success",
+            "Cerrar"
+          );
+        })
+        .catch((error) => {
+          dispararSweet(
+            "Hubo un problema al agregar el producto",
+            error,
+            "error",
+            "Cerrar"
+          );
+        });
+    } else {
+      dispararSweet(
+        "Error en la carga de producto",
+        validarForm,
+        "error",
+        "Cerrar"
+      );
+    }
   };
 
   const validarFormulario = () => {
@@ -46,36 +52,26 @@ function FormularioEdicion() {
       return "El precio debe ser mayor a 0.";
     if (!producto.descripcion.trim() || producto.descripcion.length < 10)
       return "La descripción debe tener al menos 10 caracteres.";
-    if (!producto.imagen.trim())
-      return "La URL de la imagen no debe estar vacía.";
+    if (!producto.image.trim())
+      return "La URL de la imagen no debe estar vacía";
     return null;
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const errorMsg = validarFormulario();
-    if (!errorMsg) {
-      editarProducto({ ...producto, id })
-        .then(() => toast.success("¡Producto actualizado correctamente!"))
-        .catch((error) => toast.error("Error al actualizar: " + error.message));
-    } else {
-      toast.error(errorMsg);
-    }
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setProducto({ ...producto, [name]: value });
   };
 
   if (!admin) return <Navigate to="/login" replace />;
-  if (cargando) return <p className="text-center">Cargando producto...</p>;
-  if (error) return <p className="text-danger text-center">{error}</p>;
 
   return (
     <div className="container my-5">
-      <ToastContainer />
       <div className="row justify-content-center">
-        <div className="col-md-8 bg-light shadow p-4 rounded">
+        <div className="col-md-8 bg-light p-4 shadow rounded">
           <h2 style={{ color: "#c29b94" }} className="text-center mb-4">
-            Editar Producto
+            Agregar Producto
           </h2>
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit2}>
             <div className="form-floating mb-3">
               <input
                 type="text"
@@ -94,20 +90,20 @@ function FormularioEdicion() {
               <input
                 type="url"
                 className="form-control"
-                name="imagen"
-                id="imagen"
-                value={producto.imagen}
+                name="image"
+                id="image"
+                value={producto.image}
                 onChange={handleChange}
                 placeholder="URL de la imagen"
                 required
               />
-              <label htmlFor="imagen">URL de la Imagen</label>
+              <label htmlFor="image">URL de la Imagen</label>
             </div>
 
-            {producto.imagen && (
+            {producto.image && (
               <div className="mb-3 text-center">
                 <img
-                  src={producto.imagen}
+                  src={producto.image}
                   alt="Vista previa"
                   className="img-fluid"
                   style={{ maxHeight: "250px", objectFit: "contain" }}
@@ -147,14 +143,14 @@ function FormularioEdicion() {
             <div className="d-grid">
               <button
                 type="submit"
-                className="btn btn-primary btn-lg"
+                className="btn btn-lg"
                 style={{
                   backgroundColor: "#c29b94",
                   color: "#fff",
                   border: "none",
                 }}
               >
-                Actualizar Producto
+                Agregar Producto
               </button>
             </div>
           </form>
@@ -164,4 +160,4 @@ function FormularioEdicion() {
   );
 }
 
-export default FormularioEdicion;
+export default FormularioProducto;

@@ -1,12 +1,11 @@
 import React from "react";
-
 import CardCarrito from "./CardCarritoBoostrap";
-import "../styles/carrito-container.css";
 
 import { Navigate } from "react-router-dom";
 import { useContext } from "react";
 import { CarritoContext } from "../context/CarritoContext";
 import { useAuthContext } from "../context/AuthContext";
+import { Container } from "react-bootstrap";
 
 function Carrito() {
   const { user } = useAuthContext();
@@ -23,15 +22,15 @@ function Carrito() {
   }
 
   return (
-    <div className="carrito-container">
-      {productosCarrito.length > 0 ? (
-        productosCarrito.map((producto) => (
-          <div
-            key={producto.id}
-            className="d-flex justify-content-center mb-3"
-            style={{ width: "100%" }}
-          >
-            <div className="card-wrapper w-100" style={{ maxWidth: "800px" }}>
+    <Container className="py-4">
+      <div className="carrito-container">
+        {productosCarrito.length > 0 ? (
+          productosCarrito.map((producto) => (
+            <div
+              key={producto.id}
+              className="mb-3 mx-auto"
+              style={{ maxWidth: "800px" }}
+            >
               <CardCarrito
                 producto={producto}
                 onEliminarProductoDelCarrito={eliminarProductoDelCarrito}
@@ -39,15 +38,15 @@ function Carrito() {
                 onDescontarProductoDelCarrito={descontarProductoDelCarrito}
               />
             </div>
-          </div>
-        ))
-      ) : (
-        <p>Carrito vacío</p>
-      )}
-      <div className="total-carrito">
-        <h3>Total: ${totalCarrito.toLocaleString()}</h3>
+          ))
+        ) : (
+          <p className="text-center">Carrito vacío</p>
+        )}
+        <div className="mt-4 text-end">
+          <h3>Total: ${totalCarrito.toLocaleString()}</h3>
+        </div>
       </div>
-    </div>
+    </Container>
   );
 }
 

@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-
+import "bootstrap/dist/css/bootstrap.min.css";
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import "../styles/productoDetalle.css";
@@ -60,23 +60,6 @@ function ProductoDetalle() {
     if (cantidad > 1) {
       setCantidad((cantPrev) => cantPrev - 1);
     }
-  }
-
-  {
-    /*function dispararEliminar() {
-    eliminarProducto(id)
-      .then(() => {
-        navegar("/productos");
-      })
-      .catch((error) => {
-        dispararSweet(
-          "Hubo un problema al agregar el producto",
-          error,
-          "error",
-          "Cerrar"
-        );
-      });
-  }*/
   }
 
   async function dispararEliminar() {

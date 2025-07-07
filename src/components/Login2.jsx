@@ -101,7 +101,7 @@ function Login2() {
             </Card.Title>
 
             <Form onSubmit={iniciarSesionEmailPass}>
-              <Form.Group className="mb-3" controlId="formEmail">
+              <form-floating mb-3 controlId="formEmail">
                 <Form.Label>Email</Form.Label>
                 <Form.Control
                   type="email"
@@ -110,9 +110,9 @@ function Login2() {
                   placeholder="Ingresá tu email"
                   required
                 />
-              </Form.Group>
+              </form-floating>
 
-              <Form.Group className="mb-4" controlId="formPassword">
+              <form-floating controlId="formPassword">
                 <Form.Label>Contraseña</Form.Label>
                 <Form.Control
                   type="password"
@@ -121,7 +121,7 @@ function Login2() {
                   placeholder="Ingresá tu contraseña"
                   required
                 />
-              </Form.Group>
+              </form-floating>
 
               <div className="d-grid">
                 <Button type="submit" variant="primary">
@@ -142,7 +142,10 @@ function Login2() {
   }
   if (!user && !show) {
     return (
-      <Container className="d-flex justify-content-center align-items-center min-vh-100 bg-light">
+      <Container
+        className="d-flex justify-content-center pt-5"
+        style={{ minHeight: "100vh" }}
+      >
         <Card className="p-4 shadow w-100" style={{ maxWidth: "400px" }}>
           <Card.Body>
             <Card.Title className="mb-4 text-center fw-bold">
@@ -150,7 +153,7 @@ function Login2() {
             </Card.Title>
 
             <Form onSubmit={registrarUsuario}>
-              <Form.Group className="mb-3" controlId="formEmail">
+              <div className="form-floating mb-3" controlId="formEmail">
                 <Form.Label>Email</Form.Label>
                 <Form.Control
                   type="email"
@@ -159,9 +162,9 @@ function Login2() {
                   placeholder="Ingresá tu email"
                   required
                 />
-              </Form.Group>
+              </div>
 
-              <Form.Group className="mb-4" controlId="formPassword">
+              <div className="form-floating mb-4" controlId="formPassword">
                 <Form.Label>Contraseña</Form.Label>
                 <Form.Control
                   type="password"
@@ -170,7 +173,7 @@ function Login2() {
                   placeholder="Ingresá una contraseña segura"
                   required
                 />
-              </Form.Group>
+              </div>
 
               <div className="d-grid">
                 <Button type="submit" variant="success">

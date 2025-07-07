@@ -11,7 +11,7 @@ import ProductoDetalle from "./components/ProductoDetalle";
 import ProductosContainer from "./components/ProductosContainer";
 import Login2 from "./components/Login2";
 import Admin from "./components/Admin";
-import FormularioProducto from "./components/FormularioProducto";
+import FormularioProducto from "./components/FormularioProductoBoostrap";
 import FormularioEdicion from "./components/FormularioEdicionBoostrap";
 import { useAuthContext } from "./context/AuthContext";
 import { useEffect } from "react";
@@ -20,6 +20,7 @@ import Navbar2 from "./components/Nav2";
 import { useState } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import FooterBoostrap from "./components/FooterBoostrap";
+import "bootstrap/dist/js/bootstrap.bundle.min.js";
 
 function App() {
   const { verificacionLog } = useAuthContext();
