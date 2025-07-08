@@ -9,8 +9,6 @@ import { Link } from "react-router-dom";
 import { useProductosContext } from "../context/ProductosContext";
 import { dispararSweet } from "../assets/SweetAlert";
 import Swal from "sweetalert2";
-import BotonEliminar from "./BotonEliminar";
-import BotonEditar from "./BotonEditar";
 
 function ProductoDetalle() {
   const { admin } = useAuthContext();
@@ -105,26 +103,63 @@ function ProductoDetalle() {
         <p>{productoEncontrado.descripcion}</p>
         <p>${productoEncontrado.price}</p>
         <span>Sub total: ${Number(productoEncontrado.price * cantidad)}</span>
+
         <div className="detalle-contador">
           <button onClick={restarContador}>-</button>
           <span>{cantidad}</span>
           <button onClick={sumarContador}>+</button>
         </div>
-
-        {admin ? (
-          <Link to={`/admin/editarProducto/${productoEncontrado.id}`}>
-            <BotonEditar>Editar Producto</BotonEditar>
-          </Link>
-        ) : (
-          <button onClick={agregar}>Agregar al carrito</button>
-        )}
-        {admin ? (
-          <BotonEliminar onClick={dispararEliminar}>
-            Eliminar Producto
-          </BotonEliminar>
-        ) : (
-          <></>
-        )}
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: "center",
+            gap: "16px",
+          }}
+          className="contenedor-botones"
+        >
+          {admin ? (
+            <Link to={`/admin/editarProducto/${productoEncontrado.id}`}>
+              <button
+                style={{
+                  padding: "10px",
+                  backgroundColor: "#c29b94",
+                  color: "#fff",
+                  borderRadius: "8px",
+                }}
+              >
+                Editar Producto
+              </button>
+            </Link>
+          ) : (
+            <button
+              style={{
+                padding: "10px",
+                backgroundColor: "#c29b94",
+                color: "#fff",
+                borderRadius: "8px",
+              }}
+              onClick={agregar}
+            >
+              Agregar al carrito
+            </button>
+          )}
+          {admin ? (
+            <button
+              style={{
+                padding: "10px",
+                backgroundColor: "#c29b94",
+                color: "#fff",
+                borderRadius: "8px",
+              }}
+              onClick={dispararEliminar}
+            >
+              Eliminar Producto
+            </button>
+          ) : (
+            <></>
+          )}
+        </div>
       </div>
     </div>
   );

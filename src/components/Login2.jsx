@@ -14,15 +14,14 @@ function Login2() {
   const { login, user, logout } = useAuthContext();
   const navigate = useNavigate();
   const { vaciarCarrito } = useCarritoContext();
+
   useEffect(() => {
-    // Cada vez que el estado `show` cambia, se limpian los campos
     setUsuario("");
     setPassword("");
   }, [show]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Simulación de autenticación
     if (usuario === "admin" && password === "1234") {
       login(usuario);
       navigate("/");
@@ -93,7 +92,10 @@ function Login2() {
   }
   if (!user && show) {
     return (
-      <Container className="d-flex justify-content-center align-items-start py-5">
+      <Container
+        className="d-flex justify-content-center align-items-start py-5"
+        style={{ minHeight: "100vh", maxHeight: "100vh" }}
+      >
         <Card className="p-4 shadow w-100" style={{ maxWidth: "400px" }}>
           <Card.Body>
             <Card.Title
@@ -161,9 +163,19 @@ function Login2() {
         className="d-flex justify-content-center pt-4"
         style={{ minHeight: "100vh" }}
       >
-        <Card className="p-4 shadow w-100" style={{ maxWidth: "400px" }}>
+        <Card
+          className="p-4 shadow w-100"
+          style={{
+            maxWidth: "400px",
+            borderRadius: "12px",
+            maxHeight: "400px",
+          }}
+        >
           <Card.Body>
-            <Card.Title className="mb-4 text-center fw-bold">
+            <Card.Title
+              className="mb-4 text-center fw-bold"
+              style={{ color: "#c29b94" }}
+            >
               Registrarse
             </Card.Title>
 
@@ -191,14 +203,26 @@ function Login2() {
               </div>
 
               <div className="d-grid">
-                <Button type="submit" variant="success">
+                <Button
+                  type="submit"
+                  variant="success"
+                  style={{
+                    backgroundColor: "#c29b94",
+                    borderColor: "#c29b94",
+                    color: "#fff",
+                  }}
+                >
                   Registrarse
                 </Button>
               </div>
             </Form>
 
             <div className="text-center mt-3">
-              <Button variant="link" onClick={handleShow}>
+              <Button
+                variant="link"
+                onClick={handleShow}
+                style={{ color: "#c29b94" }}
+              >
                 ¿Ya tenés cuenta? Iniciar sesión
               </Button>
             </div>
@@ -207,34 +231,5 @@ function Login2() {
       </Container>
     );
   }
-  //Formulario para inicio de sesion sin firebase
-  /*
-  return (
-    <div>
-    <form onSubmit={handleSubmit}>
-      <h2>Iniciar sesión</h2>
-      <div>
-        <label>Usuario:</label>
-        <input
-          type="text"
-          value={usuario}
-          onChange={(e) => setUsuario(e.target.value)}
-        />
-      </div>
-      <div>
-        <label>Contraseña:</label>
-        <input
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-      </div>
-      <button type="submit">Iniciar sesión</button>
-    </form>
-    
-    
-    </div>
-  );*/
-  //Formulario para inicio de sesion sin firebase
 }
 export default Login2;
