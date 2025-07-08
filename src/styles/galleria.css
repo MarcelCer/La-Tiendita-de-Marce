@@ -3,6 +3,7 @@
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   gap: 16px;
   padding: 20px;
+  background-color: transparent !important;
 }
 
 .item-collage {
@@ -38,8 +39,4 @@
   text-align: center;
   padding: 5px;
   font-size: 14px;
-}
-
-.container bg-success {
-  background-color: beige;
 }

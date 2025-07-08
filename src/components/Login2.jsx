@@ -93,10 +93,13 @@ function Login2() {
   }
   if (!user && show) {
     return (
-      <Container className="d-flex justify-content-center align-items-center min-vh-100 bg-light">
+      <Container className="d-flex justify-content-center align-items-start py-5">
         <Card className="p-4 shadow w-100" style={{ maxWidth: "400px" }}>
           <Card.Body>
-            <Card.Title className="mb-4 text-center fw-bold">
+            <Card.Title
+              className="mb-4 text-center fw-bold"
+              style={{ color: "#c29b94" }}
+            >
               Iniciar sesión
             </Card.Title>
 
@@ -124,14 +127,26 @@ function Login2() {
               </form-floating>
 
               <div className="d-grid">
-                <Button type="submit" variant="primary">
+                <Button
+                  type="submit"
+                  variant="primary"
+                  style={{
+                    backgroundColor: "#c29b94",
+                    borderColor: "#c29b94",
+                    color: "#fff",
+                  }}
+                >
                   Iniciar sesión
                 </Button>
               </div>
             </Form>
 
             <div className="text-center mt-3">
-              <Button variant="link" onClick={handleShow}>
+              <Button
+                variant="link"
+                onClick={handleShow}
+                style={{ color: "#c29b94" }}
+              >
                 ¿No tenés cuenta? Registrate
               </Button>
             </div>
@@ -143,7 +158,7 @@ function Login2() {
   if (!user && !show) {
     return (
       <Container
-        className="d-flex justify-content-center pt-5"
+        className="d-flex justify-content-center pt-4"
         style={{ minHeight: "100vh" }}
       >
         <Card className="p-4 shadow w-100" style={{ maxWidth: "400px" }}>

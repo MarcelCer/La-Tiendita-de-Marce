@@ -16,9 +16,9 @@ function Main() {
         Tendencias
       </h2>
       <div>
-        <Carrusel />
+        <Carrusel className="mt-4" />
       </div>
-      <div className="container bg-success p-2 text-dark bg-opacity-10">
+      <div className="container p-2 text-dark bg-opacity-10">
         <Galeria />
       </div>
     </main>

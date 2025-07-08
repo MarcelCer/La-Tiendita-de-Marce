@@ -80,6 +80,28 @@
   transition: background-color 0.3s ease-in-out;
 }
 
+.btn-rosado {
+  background-color: #c29b94;
+  border-color: #c29b94;
+  color: white;
+}
+
+.btn-rosado:hover {
+  background-color: #b1837e;
+  border-color: #b1837e;
+}
+
+.btn-outline-rosado {
+  background-color: transparent;
+  border: 2px solid #c29b94;
+  color: #c29b94;
+}
+
+.btn-outline-rosado:hover {
+  background-color: #c29b94;
+  color: white;
+}
+
 /* Efecto al pasar el cursor */
 #botonesContador:hover {
   background-color: #0056b3;

@@ -11,6 +11,11 @@ function Galeria() {
       titulo: "Todo cueros",
     },
     {
+      video:
+        "https://dl.dropboxusercontent.com/scl/fi/rnyqy6xjd4mkql2k8qeah/Video5.mp4?rlkey=j7o1nbqlwf9uqw6iftvcr3pps&st=hrfqmbh8",
+      titulo: "Primavera",
+    },
+    {
       src: "https://github.com/MarcelCer/La-Tiendita-de-Marce/blob/main/public/img/foto3.jpg?raw=true",
       titulo: "Romántica",
     },
@@ -18,10 +23,7 @@ function Galeria() {
       src: "https://github.com/MarcelCer/La-Tiendita-de-Marce/blob/main/public/img/foto4.jpg?raw=true",
       titulo: "Sensual",
     },
-    {
-      video: "public/video.mp4",
-      titulo: "Primavera",
-    },
+
     {
       src: "https://github.com/MarcelCer/La-Tiendita-de-Marce/blob/main/public/img/foto5.jpg?raw=true",
       titulo: "Todo seda",

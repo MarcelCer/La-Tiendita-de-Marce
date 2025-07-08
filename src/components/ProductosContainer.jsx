@@ -68,9 +68,7 @@ function ProductosContainer() {
             <button
               key={index + 1}
               className={`btn mx-1 ${
-                paginaActual === index + 1
-                  ? "btn-primary"
-                  : "btn-outline-primary"
+                paginaActual === index + 1 ? "btn-rosado" : "btn-outline-rosado"
               }`}
               onClick={() => cambiarPagina(index + 1)}
             >
